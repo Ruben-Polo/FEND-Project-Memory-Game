@@ -1,0 +1,308 @@
+html {
+    box-sizing: border-box;
+}
+
+*,
+*::before,
+*::after {
+    box-sizing: inherit;
+}
+
+html,
+body {
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    background: #ffffff url('../img/geometry2.png'); /* Background pattern from Subtle Patterns */
+    font-family: 'Coda', cursive;
+}
+
+.container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.card-image {
+    max-height: 100%;
+    max-width: 100%;
+    backface-visibility: hidden;
+    display: block;
+}
+
+h1 {
+	font-family: 'Open Sans', sans-serif;
+    font-weight: 300; 
+}
+
+/*
+ * Styles for the deck of cards 
+ */
+
+.deck {
+    width: 660px;
+    min-height: 680px;
+    background: black;
+    padding: 32px;
+    border-radius: 10px;
+    box-shadow: 12px 15px 20px 0 rgba(46, 61, 73, 0.5);
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+    margin: 0 0 3em;
+}
+
+.deck .card {
+    height: 125px;
+    width: 125px;
+    background: #FDC57B;
+    font-size: 0;
+    color: #ffffff;
+    border-radius: 8px;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-shadow: 5px 2px 20px 0 rgba(46, 61, 73, 0.5);
+}
+
+.deck .card.open {
+    cursor: default;
+    background: #DFD3D3;
+    animation: flip .60s;
+}
+
+.deck .card.show {
+    font-size: 33px;
+}
+
+.deck .card.match {
+    cursor: default;
+    background: #61C0BF;
+    animation: vibrate .75s;
+}
+
+.deck .card.unmatch {
+    cursor: default;
+    background: red;
+    animation: shake 1s;
+}
+
+.deck .card.disable {
+    pointer-events: none;
+}
+
+
+/* 
+ * Styles for the Score Panel 
+ */
+
+.score-panel {
+    text-align: left;
+    margin-bottom: 10px;
+}
+
+.score-panel .stars {
+    margin: 0;
+    padding: 0;
+    display: inline-block;
+    margin: 0 5px 0 0;
+}
+
+.score-panel .stars li {
+    list-style: none;
+    display: inline-block;
+}
+
+.score-panel .restart {
+    float: right;
+    cursor: pointer;
+}
+
+.fa-star {
+    color: gold;
+}
+
+.timer {
+    display: inline-block;
+    margin: 0 10px;
+}
+
+/* 
+ * Styles for the modal
+ */
+
+.myModal {
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    visibility: hidden;
+}
+  
+.popup {
+    margin: 70px auto;
+    padding: 5px;
+    background: #404B69;
+    border-radius: 5px;
+    width: 85%;
+    position: relative;
+    transition: 1s ease-in;
+}
+  
+.popup h2 {
+    font-size: 50px;
+    text-align: center;
+    margin-top: 0;
+    color: #F73859;
+    font-family: Helvetica, Arial, sans-serif;
+}
+
+.popup .content {
+    color: #02ccba;
+    font-size: 20px;
+    max-height: 30%;
+    overflow: auto;
+    text-align: center;
+}
+
+.show {
+    visibility: visible !important;
+    opacity: 100 !important;
+}
+
+#starRating li {
+    display: inline-block;
+}
+
+#play-again {
+    background-color: black;
+    padding: 0.7rem 1rem;
+    font-size: 1.3rem;
+    display: block;
+    margin: 0 auto;
+    width: 30%;
+    color: #ffffff;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+/*
+ * Animations
+ */
+@keyframes flip {
+    from {
+        transform: perspective(400px) rotate3d(0, 1, 0, 90deg);
+        animation-timing-function: ease-in;
+        opacity: 0;
+    }
+
+    40% {
+        transform: perspective(400px) rotate3d(0, 1, 0, -20deg);
+        animation-timing-function: ease-in;
+    }
+
+    80% {
+        transform: perspective(400px) rotate3d(0, 1, 0, -5deg);
+    }
+
+    to {
+        transform: perspective(400px);
+    }
+}
+
+@keyframes vibrate {
+        from {
+        transform: scale3d(1, 1, 1);
+    }
+
+    30% {
+        transform: scale3d(1.25, 0.75, 1);
+    }
+
+    
+    50% {
+        transform: scale3d(1.15, 0.85, 1);
+    }
+
+    65% {
+        transform: scale3d(.95, 1.05, 1);
+    }
+
+    to {
+        transform: scale3d(1, 1, 1);
+    }
+}
+
+@keyframes shake {
+    from { 
+        transform: translate(1px, 1px) rotate(0deg);
+     }
+
+    20% { 
+        transform: translate(-3px, 0px) rotate(1deg);
+     }
+
+    50% { 
+        transform: translate(-1px, 2px) rotate(-1deg);
+         }
+
+    70% { 
+        transform: translate(3px, 1px) rotate(-1deg);
+     }
+
+    80% { 
+        transform: translate(-1px, -1px) rotate(1deg);
+     }
+
+    to { 
+        transform: translate(1px, -2px) rotate(-1deg);
+     }
+}
+
+/*
+ * Media Queries
+ */
+
+ 
+ @media screen and (max-width: 450px) {
+    .deck {
+        width: 90%;
+       } 
+
+    .deck .card {
+        width: 40%;
+        height: 65px;
+    }
+
+    .popup {
+    	width: 80%;
+    }
+}
+
+@media screen and (min-width: 768px) {
+    .container {
+        font-size: 35px;
+    }
+
+    .deck {
+        width: 660px;
+        height: 680px;
+    }
+
+    .deck .card {
+        width: 125px;
+        height: 125px;
+    }
+
+    .popup {
+        width: 80%;
+    }
+}
